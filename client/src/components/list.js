@@ -1,14 +1,32 @@
 import React, { Component } from 'react';
 import ListItem from './list-item'
+
+import { Row } from 'reactstrap';
+
  class List extends Component {
+   constructor(props){
+     super(props);
+     this.state = {
+       looped: false
+     }
+   }
+
+   looper = (arr) => {
+     return arr.map( el => {
+       return (
+          <ListItem item={el}/>
+       )
+     });
+   }
+
    render () {
+     console.log(this.props.data.products)
      return (
-      <div className="event">
-        <div className="event__date">
-          <ListItem/>
-        </div>
-      </div>
+        <Row  noGutters={true}>
+          {this.looper(this.props.data.products)}
+        </Row>
      )
+
    }
  }
 
