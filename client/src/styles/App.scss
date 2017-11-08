@@ -1,6 +1,6 @@
 // VARIABLES
 
-// media queries brakers
+// media queries breakers
 $break-x-small: "screen and (min-width: 576px)";
 $break-small: "screen and (min-width: 768px)";
 $break-medium: "screen and (min-width: 992px)";
@@ -18,7 +18,7 @@ body {
 
 .container {
   background: blue;
-  @media #{$break-x-large} {
-    background: purple;
+  @media #{$break-medium} {
+    padding: 0;
   }
 }
