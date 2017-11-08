@@ -1,0 +1,24 @@
+// VARIABLES
+
+// media queries brakers
+$break-x-small: "screen and (min-width: 576px)";
+$break-small: "screen and (min-width: 768px)";
+$break-medium: "screen and (min-width: 992px)";
+$break-large: "screen and (min-width: 1200px)";
+$break-x-large: "screen and (min-width: 1920px)";
+
+
+
+// RESET
+body {
+  margin: 0;
+  padding: 0;
+  background-color: lime;
+}
+
+.container {
+  background: blue;
+  @media #{$break-x-large} {
+    background: purple;
+  }
+}
