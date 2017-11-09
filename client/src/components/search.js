@@ -5,7 +5,7 @@ import React, { Component } from 'react';
      return (
       <div className="event">
         <div className="event__date">
-          Search
+          Search hy
         </div>
       </div>
      )

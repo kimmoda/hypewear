@@ -18,8 +18,8 @@ class App extends Component {
     };
   }
 
-  getProducts () {
-    fetch('http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=green+dress&limit=100', {
+  getProducts (search) {
+    fetch(`http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=${search}&limit=50`, {
       method: 'get'
     }).then(response => {
       return response.json()
@@ -33,7 +33,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getProducts()
+    this.getProducts("men")
   }
 
 
@@ -66,8 +66,11 @@ class App extends Component {
       </div>
     );
     return (
-      <div>
-        ...loading
+      <div className="loader">
+        <div className="loader__caption">
+          <img className="logo__image" src={Logo}></img>
+          <p className="loader__text">is loading...</p>
+        </div>
       </div>
     )
   }

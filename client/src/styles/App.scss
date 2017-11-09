@@ -52,8 +52,14 @@ img {
 
   &__container {
     background-color: #FFF;
-    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
-    padding: $baseline * 4;
+    padding: $baseline * 4 $baseline * 2;
+    @media #{$break-medium} {
+      padding: $baseline * 4 0;
+    }
+    @media #{$break-large} {
+      box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.3);
+      padding: $baseline * 4;
+    }
   }
 }
 
@@ -69,11 +75,20 @@ img {
 // Product
 .product {
   height: 100%;
-  border: 2px solid $light-grey;
+  border: $baseline solid $light-grey;
   text-align: center;
   padding: $baseline * 3;
+  padding-bottom: $baseline * 9;
   padding-top: 0;
   background-color: $white;
+  position: relative;
+
+  &__wrap-img {
+    height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   &__img {
     max-height: 300px;
@@ -84,12 +99,94 @@ img {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    margin-bottom: 0;
+  }
+
+  &__caption {
+    margin-top: $baseline * 4;
   }
 
   &__price--sale {
     text-decoration: line-through;
     color: $grey;
   }
+
+  &__ribbon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+    overflow: hidden;
+    width: 75px;
+    height: 75px;
+    text-align: right;
+  }
+
+  &__ribbon-text {
+    font-size: 10px;
+    font-weight: bold;
+    color: #FFF;
+    text-transform: uppercase;
+    text-align: center;
+    line-height: 20px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    width: 100px;
+    display: block;
+    letter-spacing: 2px;
+    background: $black;
+    position: absolute;
+    top: 19px; right: -21px;
+  }
+
+  &__actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+  }
+
+  &__button {
+    display: block;
+    width: 50%;
+    background-color: $white;
+    border-top: 1px solid $grey;
+    padding: $baseline * 2 0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: $baseline * 1.7;
+    text-align: center;
+    color: $black;
+    transition: all 0.35s ease;
+
+    &--buy {
+      background-color: $black;
+      color: $white;
+    }
+  }
+
 }
 
-//Filters
+
+//loader
+.loader {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+
+  &__caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__text {
+    font-size: $baseline * 2;
+    text-transform: uppercase;
+    letter-spacing: $baseline / 2;
+    margin: $baseline * 3 0 0 0;
+    text-align: center;
+  }
+}
