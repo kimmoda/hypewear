@@ -12,7 +12,7 @@ import { Row } from 'reactstrap';
    }
 
    looper = (arr) => {
-     return arr.map( el => {
+    return arr.map( el => {
        return (
           <ListItem item={el}/>
        )

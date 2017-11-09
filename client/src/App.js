@@ -19,7 +19,7 @@ class App extends Component {
   }
 
   getProducts () {
-    fetch('http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=red+dress&limit=100', {
+    fetch('http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=green+dress&limit=100', {
       method: 'get'
     }).then(response => {
       return response.json()
@@ -55,10 +55,10 @@ class App extends Component {
         <div className="bg"></div>
         <Container fluid={true}>
             <Row noGutters={true}>
-              <Col xs="12" sm="12" md="4" lg="2">
+              <Col className="background__light-grey" xs="12" sm="12" md="4" lg="2">
                 <Filters/>
               </Col>
-              <Col xs="12" sm="12" sm="8" lg="10">
+              <Col className="background__light-grey" xs="12" sm="12" sm="8" lg="10">
                 <List data={this.state.data}/>
               </Col>
             </Row>
