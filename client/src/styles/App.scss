@@ -154,15 +154,25 @@ img {
     border-top: 1px solid $grey;
     padding: $baseline * 2 0;
     text-transform: uppercase;
-    letter-spacing: 2px;
-    font-size: $baseline * 1.7;
+    letter-spacing: 1px;
+    font-size: $baseline * 1.5;
     text-align: center;
     color: $black;
-    transition: all 0.35s ease;
+
+    &:hover {
+      color: $black;
+      text-decoration: none;
+    }
 
     &--buy {
+      letter-spacing: 2px;
+      font-size: $baseline * 1.7;
       background-color: $black;
       color: $white;
+      text-decoration: none;
+      &:hover {
+        color: $white;
+      }
     }
   }
 
@@ -189,4 +199,41 @@ img {
     margin: $baseline * 3 0 0 0;
     text-align: center;
   }
+}
+
+
+//filters
+.filter {
+  margin: 0 $baseline * 2;
+  margin-top: $baseline * 4;
+  background-color: $white;
+
+  &:first-child {
+    margin-top: $baseline * 1.5;
+  }
+
+  &__title {
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: $baseline * 2.5;
+    border-bottom: 1px solid $grey;
+    padding: $baseline * 2;
+    margin-bottom: $baseline * 3;
+  }
+
+  &__color-wrap {
+    display: flex;
+  }
+
+  &__color {
+    background-color: lime;
+    margin-left: $baseline * 2;
+    margin-bottom: $baseline;
+    cursor: pointer;
+    display: inline-block;
+    width: $baseline * 6;
+    height: $baseline * 6;
+  }
+
+  &__color-wrap {}
 }

@@ -20,7 +20,6 @@ import { Row } from 'reactstrap';
    }
 
    render () {
-     console.log(this.props.data.products)
      return (
         <Row  noGutters={true}>
           {this.looper(this.props.data.products)}

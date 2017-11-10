@@ -18,14 +18,14 @@ class App extends Component {
     };
   }
 
-  getProducts (search) {
+  getProducts = (search) => {
     fetch(`http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=${search}&limit=50`, {
       method: 'get'
     }).then(response => {
       return response.json()
     }).then(
       data => {
-      console.log(data)
+      console.log(data.products)
       this.setState({
         data: data
       })
@@ -47,7 +47,7 @@ class App extends Component {
                   <img className="logo__image" src={Logo}></img>
                 </Col>
                 <Col xs="12" sm="12" md="8" lg="8">
-                  <Search/>
+                  <Search getProducts={this.getProducts}/>
                 </Col>
               </Row>
           </Container>
