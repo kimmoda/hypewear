@@ -9,6 +9,8 @@ import Logo from'./images/hypewear-logo.svg';
 import Search from './components/search';
 import Filters from './components/filters';
 import List from './components/list';
+import { addSearch, addProducts } from './action.js'
+import { connect } from "react-redux"
 
 class App extends Component {
   constructor(props) {
@@ -19,16 +21,15 @@ class App extends Component {
   }
 
   getProducts = (search) => {
+    //if (search) console.log(search)
+    this.props.addSearch(search)
     fetch(`http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=${search}&limit=50`, {
       method: 'get'
     }).then(response => {
       return response.json()
     }).then(
       data => {
-      console.log(data.products)
-      this.setState({
-        data: data
-      })
+      this.props.addProducts(data.products)
     })
   }
 
@@ -38,7 +39,7 @@ class App extends Component {
 
 
   render() {
-    if (this.state.data) return (
+    if (this.props.products.length) return (
       <div>
         <header className="header">
           <Container className="header__container">
@@ -59,7 +60,7 @@ class App extends Component {
                 <Filters/>
               </Col>
               <Col className="background__light-grey" xs="12" sm="12" sm="8" lg="10">
-                <List data={this.state.data}/>
+                <List/>
               </Col>
             </Row>
           </Container>
@@ -76,4 +77,15 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispact = (dispatch) => ({
+  addSearch: (inputValue) => dispatch(addSearch(inputValue)),
+  addProducts: (products) => dispatch(addProducts(products)),
+})
+
+const mapStateProps = (state) => (
+  {
+  inputValue: state.inputValue,
+  products: state.products,
+})
+
+ export default connect(mapStateProps, mapDispact)(App);

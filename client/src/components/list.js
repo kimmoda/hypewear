@@ -2,16 +2,11 @@ import React, { Component } from 'react';
 import ListItem from './list-item'
 
 import { Row } from 'reactstrap';
+import { connect } from "react-redux"
 
  class List extends Component {
-   constructor(props){
-     super(props);
-     this.state = {
-       looped: false
-     }
-   }
 
-   looper = (arr) => {
+   getProduct = (arr) => {
     return arr.map( el => {
        return (
           <ListItem item={el}/>
@@ -20,13 +15,24 @@ import { Row } from 'reactstrap';
    }
 
    render () {
+     if(this.props.products){
+     console.log(this.props.inputValue)
      return (
-        <Row  noGutters={true}>
-          {this.looper(this.props.data.products)}
+        <Row noGutters={true}>
+          {this.getProduct(this.props.products)}
         </Row>
-     )
-
+       )
+     }
+     else {
+       return <div>maison margela</div>
+     }
    }
  }
 
-export default List;
+ const mapStateProps = (state) => ({
+   inputValue: state.inputValue,
+   products: state.products,
+ })
+
+
+  export default connect(mapStateProps, null)(List);

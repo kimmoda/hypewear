@@ -16,7 +16,6 @@ import { Col } from 'reactstrap';
 
    addSaleRibbon (sale) {
      if (sale) {
-       console.log(sale)
        return (
         <div className="product__ribbon">
           <span className="product__ribbon-text">
