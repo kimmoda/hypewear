@@ -6,7 +6,7 @@ import { Input } from 'reactstrap';
    check = (value, key) => {
      console.log(value, key);
      if (key === 13) {
-       this.props.getProducts(value);
+       this.props.getProducts(value, "+red");
      }
    }
 

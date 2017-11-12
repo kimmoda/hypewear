@@ -13,7 +13,7 @@ $baseline: 6px;
 // colors
 $black: #222;
 $grey: #ccc;
-$light-grey: #ddd;
+$light-grey: #f0f0f0;
 $white: #fff;
 
 // background
@@ -221,18 +221,96 @@ img {
     margin-bottom: $baseline * 3;
   }
 
+  &__button {
+    display: inline-block;
+    padding: $baseline $baseline * 2;
+    border: 1px solid $grey;
+    margin: $baseline auto;
+    cursor: pointer;
+  }
+
   &__color-wrap {
     display: flex;
   }
 
   &__color {
-    background-color: lime;
-    margin-left: $baseline * 2;
+    margin-left: $baseline * 1.8;
     margin-bottom: $baseline;
     cursor: pointer;
     display: inline-block;
     width: $baseline * 6;
     height: $baseline * 6;
+    border: 1px solid #DDD;
+    position: relative;
+
+    &--active:before {
+      content: '';
+      display: block;
+      width: $baseline * 1.25;
+      height: $baseline * 2.5;
+      border: solid #fff;
+      border-width: 0 4px 4px 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%) rotate(45deg);
+    }
+
+    &--active:after {
+      content: '';
+      display: block;
+      width: $baseline;
+      height: $baseline * 2;
+      border: solid #000;
+      border-width: 0 2px 2px 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -60%) rotate(45deg);
+    }
+
+    &--Brown {
+      background-color: #8c6b44;
+    }
+    &--Yellow {
+      background-color: #fdfe83;
+    }
+    &--Orange {
+      background-color: #ef9742;
+    }
+    &--Red {
+      background-color: #fb5e53;
+    }
+    &--Blue {
+      background-color: #56bff6;
+    }
+    &--Gold {
+      background-image: linear-gradient(to top right, #a83, #f8dfa2);
+    }
+    &--Purple {
+      background-color: #9e62a7;
+    }
+    &--Green {
+      background-color: #62c978;
+    }
+    &--Gray {
+      background-color: #999;
+    }
+    &--White {
+      background-color: #FFF;
+    }
+    &--Black {
+      background-color: #000;
+    }
+    &--Pink {
+      background-color: #ebd0d5;
+    }
+    &--Silver {
+      background-image: linear-gradient(to top right, #606060, #dadada);
+    }
+    &--Beige {
+      background-color: #c5b8a0;
+    }
   }
 
   &__color-wrap {}

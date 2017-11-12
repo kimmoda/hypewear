@@ -39,7 +39,7 @@ import { Col } from 'reactstrap';
              <p className="product__name">{this.props.item.name}</p>
              {this.checkSale(this.props.item.salePriceLabel)}
              <div className="product__actions">
-               <a className="product__button" target="_blank" href={this.props.item.clickUrl}>Add to your list</a>
+               <a className="product__button" target="_blank" href={this.props.item.clickUrl}>Add to list</a>
                <a className="product__button product__button--buy" target="_blank" href={this.props.item.clickUrl}>Buy now</a>
              </div>
            </div>

@@ -6,10 +6,10 @@ import { connect } from "react-redux"
 
  class List extends Component {
 
-   getProduct = (arr) => {
-    return arr.map( el => {
+   getProduct = (products) => {
+    return products.map( product => {
        return (
-          <ListItem item={el}/>
+          <ListItem key={product.id} item={product}/>
        )
      });
    }

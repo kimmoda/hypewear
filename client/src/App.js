@@ -9,21 +9,15 @@ import Logo from'./images/hypewear-logo.svg';
 import Search from './components/search';
 import Filters from './components/filters';
 import List from './components/list';
-import { addSearch, addProducts } from './action.js'
+import { addSearch, addProducts, addFilterColor } from './action.js'
 import { connect } from "react-redux"
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: null
-    };
-  }
 
-  getProducts = (search) => {
-    //if (search) console.log(search)
+  getProducts = (search, filters="") => {
     this.props.addSearch(search)
-    fetch(`http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=${search}&limit=50`, {
+    if (filters) this.props.addFilterColor(filters)
+    fetch(`http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=${search}${filters}${this.props.filterColor.join("")}&limit=50`, {
       method: 'get'
     }).then(response => {
       return response.json()
@@ -57,7 +51,7 @@ class App extends Component {
         <Container fluid={true}>
             <Row noGutters={true}>
               <Col className="background__light-grey" xs="12" sm="12" md="4" lg="2">
-                <Filters/>
+                <Filters getProducts={this.getProducts}/>
               </Col>
               <Col className="background__light-grey" xs="12" sm="12" sm="8" lg="10">
                 <List/>
@@ -80,12 +74,15 @@ class App extends Component {
 const mapDispact = (dispatch) => ({
   addSearch: (inputValue) => dispatch(addSearch(inputValue)),
   addProducts: (products) => dispatch(addProducts(products)),
+  addFilterColor: (filterColor) => dispatch(addFilterColor(filterColor)),
 })
 
 const mapStateProps = (state) => (
   {
   inputValue: state.inputValue,
   products: state.products,
+  colors: state.colors,
+  filterColor: state.filterColor,
 })
 
  export default connect(mapStateProps, mapDispact)(App);
