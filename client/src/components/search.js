@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Input } from 'reactstrap';
+import { connect } from "react-redux"
 
  class Search extends Component {
 
    check = (value, key) => {
-     console.log(value, key);
      if (key === 13) {
-       this.props.getProducts(value, "+red");
+       this.props.getProducts(value, this.props.filterColor);
      }
    }
 
@@ -33,4 +33,13 @@ import { Input } from 'reactstrap';
    }
  }
 
-export default Search;
+const mapStateProps = (state) => (
+  {
+  inputValue: state.inputValue,
+  products: state.products,
+  colors: state.colors,
+  filterColor: state.filterColor,
+  toggledFilterClass: state.toggledFilterClass,
+})
+
+ export default connect(mapStateProps, null)(Search);

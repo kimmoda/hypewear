@@ -15,9 +15,11 @@ import { connect } from "react-redux"
 class App extends Component {
 
   getProducts = (search, filters="") => {
+
     this.props.addSearch(search)
     if (filters) this.props.addFilterColor(filters)
-    fetch(`http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=${search}${filters}${this.props.filterColor.join("")}&limit=50`, {
+    console.log("FETCH API", this.props.filterColor);
+    fetch(`http://api.shopstyle.com/api/v2/products?pid=uid3204-40024198-72&fts=${search}${filters}${this.props.filterColor.join("")}&fl=p20:30&limit=50`, {
       method: 'get'
     }).then(response => {
       return response.json()
@@ -33,6 +35,7 @@ class App extends Component {
 
 
   render() {
+    console.log("RENDER", this.props.filterColor);
     if (this.props.products.length) return (
       <div>
         <header className="header">

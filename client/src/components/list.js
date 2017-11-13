@@ -8,6 +8,7 @@ import { connect } from "react-redux"
 
    getProduct = (products) => {
     return products.map( product => {
+      console.log(product)
        return (
           <ListItem key={product.id} item={product}/>
        )
@@ -15,17 +16,11 @@ import { connect } from "react-redux"
    }
 
    render () {
-     if(this.props.products){
-     console.log(this.props.inputValue)
      return (
         <Row noGutters={true}>
           {this.getProduct(this.props.products)}
         </Row>
        )
-     }
-     else {
-       return <div>maison margela</div>
-     }
    }
  }
 
