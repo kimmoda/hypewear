@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Input, Container, Row, Col} from 'reactstrap';
 
-import { addColors, toggleClassColor, ClearFilterColors } from '../action.js'
+import { addColors, toggleClassColor, ClearFilterColors, addMaxPrice, addMinPrice } from '../action.js'
 
  class Filters extends Component {
 
@@ -22,8 +22,6 @@ import { addColors, toggleClassColor, ClearFilterColors } from '../action.js'
    }
 
    onClickFilterColor = (color) => {
-     let colorQuery = `+${color}`;
-     this.props.getProducts(this.props.inputValue, colorQuery)
      this.props.toggleClassColor(color)
    }
 
@@ -39,13 +37,19 @@ import { addColors, toggleClassColor, ClearFilterColors } from '../action.js'
      });
    }
 
+   handleChangeMin = (e) => {
+     this.props.addMinPrice(e.target.value);
+   }
+
+   handleChangeMax = (e) => {
+     this.props.addMaxPrice(e.target.value);
+   }
+
    clearColors = () => {
-     this.props.ClearFilterColors()
-     this.props.getProducts(this.props.inputValue, "")
+     this.props.ClearFilterColors();
    }
 
    render () {
-     console.log(this.handleOnChange)
      return (
       <div className="filter__wrap">
         <div className="filter">
@@ -56,7 +60,7 @@ import { addColors, toggleClassColor, ClearFilterColors } from '../action.js'
           <Container>
             <Row>
               <Col>
-                <div className="filter__button" onClick={this.clearColors}>Clear filter</div>
+                <div className="filter__button" onClick={this.clearColors}>Clear</div>
               </Col>
             </Row>
           </Container>
@@ -68,80 +72,79 @@ import { addColors, toggleClassColor, ClearFilterColors } from '../action.js'
                 <Row>
                   <Col xs="6" sm="6" md="6" lg="6">
                     <label>Min</label>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="21">0</option>
-                      <option value="22">10</option>
-                      <option value="23">25</option>
-                      <option value="24">50</option>
-                      <option value="25">75</option>
-                      <option value="26">100</option>
-                      <option value="27">125</option>
-                      <option value="28">150</option>
-                      <option value="29">200</option>
-                      <option value="30">250</option>
-                      <option value="31">300</option>
-                      <option value="32">350</option>
-                      <option value="33">400</option>
-                      <option value="34">500</option>
-                      <option value="35">600</option>
-                      <option value="36">700</option>
-                      <option value="37">800</option>
-                      <option value="38">900</option>
-                      <option value="39">1000</option>
-                      <option value="40">1250</option>
-                      <option value="41">1500</option>
-                      <option value="42">1750</option>
-                      <option value="43">2000</option>
-                      <option value="44">2250</option>
-                      <option value="45">2500</option>
-                      <option value="46">3000</option>
-                      <option value="47">3500</option>
-                      <option value="48">4000</option>
-                      <option value="49">4500</option>
+                    <Input onChange={this.handleChangeMin} type="select" name="select" id="exampleSelect">
+                      <option value="20">0 $</option>
+                      <option value="21">10 $</option>
+                      <option value="22">25 $</option>
+                      <option value="23">50 $</option>
+                      <option value="24">75 $</option>
+                      <option value="25">100 $</option>
+                      <option value="26">125 $</option>
+                      <option value="27">150 $</option>
+                      <option value="28">200 $</option>
+                      <option value="39">250 $</option>
+                      <option value="40">300 $</option>
+                      <option value="31">350 $</option>
+                      <option value="32">400 $</option>
+                      <option value="33">500 $</option>
+                      <option value="34">600 $</option>
+                      <option value="35">700 $</option>
+                      <option value="36">800 $</option>
+                      <option value="37">900 $</option>
+                      <option value="38">1000 $</option>
+                      <option value="39">1250 $</option>
+                      <option value="40">1500 $</option>
+                      <option value="41">1750 $</option>
+                      <option value="42">2000 $</option>
+                      <option value="43">2250 $</option>
+                      <option value="44">2500 $</option>
+                      <option value="45">3000 $</option>
+                      <option value="46">3500 $</option>
+                      <option value="47">4000 $</option>
+                      <option value="48">4500 $</option>
                     </Input>
                   </Col>
                   <Col xs="6" sm="6" sm="6" lg="6">
                     <label>Max</label>
-                    <Input type="select" name="select" id="exampleSelect">
-                      <option value="49">+5000</option>
-                      <option value="48">4500</option>
-                      <option value="47">4000</option>
-                      <option value="46">3500</option>
-                      <option value="45">3000</option>
-                      <option value="44">2500</option>
-                      <option value="43">2250</option>
-                      <option value="42">2000</option>
-                      <option value="41">1750</option>
-                      <option value="40">1500</option>
-                      <option value="39">1250</option>
-                      <option value="38">1000</option>
-                      <option value="37">900</option>
-                      <option value="36">800</option>
-                      <option value="35">700</option>
-                      <option value="34">600</option>
-                      <option value="33">500</option>
-                      <option value="32">400</option>
-                      <option value="31">350</option>
-                      <option value="30">300</option>
-                      <option value="29">250</option>
-                      <option value="28">200</option>
-                      <option value="27">150</option>
-                      <option value="26">125</option>
-                      <option value="25">100</option>
-                      <option value="24">75</option>
-                      <option value="23">50</option>
-                      <option value="22">25</option>
-                      <option value="21">10</option>
+                    <Input onChange={this.handleChangeMax} ref='max' type="select" name="select" id="exampleSelect">
+                      <option value="49">+5000 $</option>
+                      <option value="47">4500 $</option>
+                      <option value="46">4000 $</option>
+                      <option value="45">3500 $</option>
+                      <option value="44">3000 $</option>
+                      <option value="43">2500 $</option>
+                      <option value="42">2250 $</option>
+                      <option value="41">2000 $</option>
+                      <option value="40">1750 $</option>
+                      <option value="39">1500 $</option>
+                      <option value="38">1250 $</option>
+                      <option value="37">1000 $</option>
+                      <option value="36">900 $</option>
+                      <option value="35">800 $</option>
+                      <option value="34">700 $</option>
+                      <option value="33">600 $</option>
+                      <option value="32">500 $</option>
+                      <option value="31">400 $</option>
+                      <option value="30">350 $</option>
+                      <option value="29">300 $</option>
+                      <option value="28">250 $</option>
+                      <option value="27">200 $</option>
+                      <option value="26">150 $</option>
+                      <option value="25">125 $</option>
+                      <option value="24">100 $</option>
+                      <option value="23">75 $</option>
+                      <option value="22">50 $</option>
+                      <option value="21">25 $</option>
+                      <option value="20">10 $</option>
                     </Input>
                   </Col>
                 </Row>
                 <div className="filter__wrap-button">
                   <Row>
-                    <Col xs="6" sm="6" md="6" lg="6">
-                      <div className="filter__button filter__button--inverse" onClick={()=> {console.log("Set")}}>Set</div>
+                    <Col xs="12" sm="12" md="12" lg="8">
+                      <div className="filter__button filter__button--inverse" onClick={()=> {this.props.onSetPrice(this.props.minPrice, this.props.maxPrice)}}>Set</div>
                     </Col>
-                    <Col xs="6" sm="6" sm="6" lg="6">
-                      <div className="filter__button" onClick={()=> {console.log("Clear")}}>Clear</div>
+                    <Col xs="12" sm="12" sm="12" lg="4">
                     </Col>
                   </Row>
                 </div>
@@ -158,6 +161,8 @@ import { addColors, toggleClassColor, ClearFilterColors } from '../action.js'
    addColors: (colors) => dispatch(addColors(colors)),
    toggleClassColor: (color) => dispatch(toggleClassColor(color)),
    ClearFilterColors: () => dispatch(ClearFilterColors()),
+   addMaxPrice: (maxPrice) => dispatch(addMaxPrice(maxPrice)),
+   addMinPrice: (minPrice) => dispatch(addMinPrice(minPrice)),
  })
 
  const mapStateProps = (state) => (
@@ -167,6 +172,8 @@ import { addColors, toggleClassColor, ClearFilterColors } from '../action.js'
    colors: state.colors,
    filterColor: state.filterColor,
    toggledFilterClass: state.toggledFilterClass,
+   maxPrice: state.maxPrice,
+   minPrice: state.minPrice,
  })
 
   export default connect(mapStateProps, mapDispact)(Filters);

@@ -40,6 +40,14 @@ img {
   padding: 0;
 }
 
+// Helper
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 // header
 .header {
   @media #{$break-medium} {
@@ -89,6 +97,33 @@ img {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    position: relative;
+  }
+
+  &__wrap-img:hover:before {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  &__wrap-img:before {
+    content: 'see details';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: $baseline * 2;
+    background-color: rgba(255, 255, 255, 0.9);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.35s ease;
+    font-weight: bolder;
   }
 
   &__img {
@@ -233,9 +268,18 @@ img {
     font-size: $baseline * 1.7;
     width: 100%;
     text-align: center;
+    color: $black;
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+      color: $black;
+    }
     &--inverse {
       background-color: $black;
       color: $white;
+      &:hover {
+        color: $white;
+      }
     }
   }
 
@@ -328,4 +372,73 @@ img {
   }
 
   &__color-wrap {}
+}
+
+// Modal
+
+.ReactModal {
+  &__Overlay {
+    z-index: 98;
+    background-color: $light-grey !important;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.35s ease-in-out;
+    top: 200% !important;
+
+    &--after-open {
+      visibility: visible;
+      opacity: 1;
+      top: 0 !important;
+    }
+  }
+
+  &__Content {
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-right: -50% !important;
+    transform: translate(-50%, -50%) !important;
+    background-color: lime;
+    border: 0 !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+
+}
+
+.modal {
+
+  &__title {
+    font-size: $baseline * 4;
+    margin-bottom: $baseline * 4;
+  }
+
+  &__description {
+    margin-top: $baseline * 4;
+    font-size: $baseline * 2;
+    color: $grey;
+  }
+
+  &__subtitle {
+    margin: $baseline * 2 0;
+  }
+
+  &__size {
+    display: inline-block;
+    border: 1px solid $black;
+    padding: $baseline;
+    margin-right: $baseline
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 40px;
+    transform: translate(50%, -50%);
+    z-index: 9999;
+    cursor: pointer
+  }
 }

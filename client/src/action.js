@@ -38,3 +38,25 @@ export const ClearFilterColors = () => {
     type: "CLEAR_FILTER_COLORS",
   })
 }
+
+export const addMaxPrice = (maxPrice) => {
+  return ({
+    type: "MAX_PRICE",
+    maxPrice: maxPrice
+  })
+}
+
+export const addMinPrice = (minPrice) => {
+  return ({
+    type: "MIN_PRICE",
+    minPrice: minPrice
+  })
+}
+
+export const addPricefilter = (min, max) => {
+  return ({
+    type: "PRICE_FILTER",
+    min: min,
+    max: max,
+  })
+}

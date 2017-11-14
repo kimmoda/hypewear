@@ -8,7 +8,6 @@ import { connect } from "react-redux"
 
    getProduct = (products) => {
     return products.map( product => {
-      console.log(product)
        return (
           <ListItem key={product.id} item={product}/>
        )

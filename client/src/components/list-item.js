@@ -1,20 +1,7 @@
 import React, { Component } from 'react';
-import { Col } from 'reactstrap';
+import { Col, Row, Container } from 'reactstrap';
 import Modal from 'react-modal';
-
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)',
-    zIndex                : '999',
-  }
-};
-
+import CloseIcon from '../images/close.png';
 
  class ListItem extends Component {
 
@@ -30,20 +17,20 @@ const customStyles = {
      this.closeModal = this.closeModal.bind(this);
    }
 
-   openModal() {
+   openModal = () => {
      this.setState({modalIsOpen: true});
    }
 
-   afterOpenModal() {
+   afterOpenModal = () => {
      // references are now sync'd and can be accessed.
-     this.subtitle.style.color = '#f00';
+     // this.subtitle.style.color = '#f00';
    }
 
-   closeModal() {
+   closeModal = () => {
      this.setState({modalIsOpen: false});
    }
 
-   checkSale (sale) {
+   checkSale = (sale) => {
      if (sale) {
        return (
          <h5>
@@ -54,7 +41,7 @@ const customStyles = {
      return <h5>{this.props.item.priceLabel}</h5>
    }
 
-   addSaleRibbon (sale) {
+   addSaleRibbon = (sale) => {
      if (sale) {
        return (
         <div className="product__ribbon">
@@ -65,6 +52,25 @@ const customStyles = {
        )
      }
      return
+   }
+
+   addSizes = (sizes) => {
+     if (sizes.length) {
+       console.log(sizes);
+       return sizes.map((size) => {
+         return (
+           <div className="modal__size">{size.name}</div>
+         )
+       });
+     }
+   }
+
+   addTitleSizes = (sizes) => {
+     if (sizes.length) {
+       return (
+         <h5 className="modal__subtitle">Available sizes</h5>
+       )
+     }
    }
 
    render () {
@@ -88,12 +94,39 @@ const customStyles = {
            isOpen={this.state.modalIsOpen}
            onAfterOpen={this.afterOpenModal}
            onRequestClose={this.closeModal}
-           style={customStyles}
            contentLabel="Example Modal"
          >
-
-           <h2 ref={subtitle => this.subtitle = subtitle}>{this.props.item.name}</h2>
-           <button onClick={this.closeModal}>close</button>
+           <Container>
+               <Row>
+                 <Col xs="12" sm="12" md="4" lg="4">
+                   <div className="flex-center">
+                     <img className="modal__img" src={this.props.item.image.sizes.Original.url}/>
+                   </div>
+                 </Col>
+                 <Col xs="12" sm="12" md="8" lg="8">
+                   <div className="flex-center">
+                     <div>
+                       <h2 className="modal__title" ref={subtitle => this.subtitle = subtitle}>{this.props.item.name}</h2>
+                       {this.checkSale(this.props.item.salePriceLabel)}
+                       <Row>
+                         <Col xs="6" sm="6" md="6" lg="6">
+                           <a className="filter__button" target="_blank" href={this.props.item.clickUrl}>Add to list</a>
+                         </Col>
+                         <Col xs="6" sm="6" md="6" lg="6">
+                           <a className="filter__button filter__button--inverse" target="_blank" href={this.props.item.clickUrl}>Buy now</a>
+                         </Col>
+                       </Row>
+                       {this.addTitleSizes(this.props.item.sizes)}
+                       {this.addSizes(this.props.item.sizes)}
+                       <p className="modal__description">{this.props.item.description}</p>
+                     </div>
+                   </div>
+                 </Col>
+               </Row>
+           </Container>
+           <div onClick={this.closeModal}>
+             <img className="modal__close" src={CloseIcon}></img>
+           </div>
          </Modal>
 
        </Col>

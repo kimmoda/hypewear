@@ -5,6 +5,9 @@ const defaultState = {
   filterColor: [],
   inputValue: "",
   toggledFilterClass: [],
+  minPrice: 20,
+  maxPrice: 49,
+  filterPrice: [],
 };
 
 const reducer = (state = defaultState, action) => {
@@ -24,8 +27,16 @@ const reducer = (state = defaultState, action) => {
     return {...state, toggledFilterClass: [...state.toggledFilterClass, action.toggledFilterClass]}
   }
   if (action.type === "CLEAR_FILTER_COLORS") {
-    console.log("HERE")
     return {...state, filterColor: [], toggledFilterClass: []}
+  }
+  if (action.type === "MAX_PRICE") {
+    return {...state, maxPrice: action.maxPrice}
+  }
+  if (action.type === "MIN_PRICE") {
+    return {...state, minPrice: action.minPrice}
+  }
+  if (action.type === "PRICE_FILTER") {
+    return {...state, filterPrice: [action.min, action.max]  }
   }
   return state;
 }
