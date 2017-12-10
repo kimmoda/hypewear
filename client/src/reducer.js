@@ -8,6 +8,8 @@ const defaultState = {
   minPrice: 20,
   maxPrice: 49,
   filterPrice: [],
+  favoriteProducts: [],
+  favoriteProductsId: [],
 };
 
 const reducer = (state = defaultState, action) => {
@@ -37,6 +39,9 @@ const reducer = (state = defaultState, action) => {
   }
   if (action.type === "PRICE_FILTER") {
     return {...state, filterPrice: [action.min, action.max]  }
+  }
+  if (action.type === "ADD_TO_FAVOURITE_LIST") {
+    return {...state, favoriteProductsId: [...state.favoriteProductsId, action.product.id], favoriteProducts: [...state.favoriteProducts, action.product]  }
   }
   return state;
 }

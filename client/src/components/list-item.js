@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Col, Row, Container } from 'reactstrap';
 import Modal from 'react-modal';
 import CloseIcon from '../images/close.png';
+import { connect } from "react-redux";
 
  class ListItem extends Component {
 
@@ -22,8 +23,6 @@ import CloseIcon from '../images/close.png';
    }
 
    afterOpenModal = () => {
-     // references are now sync'd and can be accessed.
-     // this.subtitle.style.color = '#f00';
    }
 
    closeModal = () => {
@@ -54,12 +53,21 @@ import CloseIcon from '../images/close.png';
      return
    }
 
+   AddToFavoriteBanner = (product) => {
+     let selectedClass = `product__selected`;
+     if (this.props.favoriteProductsId.indexOf(product.id) >= 0) {
+       selectedClass = `product__selected product__selected--active`
+     }
+     return (
+      <div className={selectedClass}>Favorite</div>
+     )
+   }
+
    addSizes = (sizes) => {
      if (sizes.length) {
-       console.log(sizes);
        return sizes.map((size) => {
          return (
-           <div className="modal__size">{size.name}</div>
+           <div key={size.name} className="modal__size">{size.name}</div>
          )
        });
      }
@@ -79,13 +87,14 @@ import CloseIcon from '../images/close.png';
          <div className="product">
            {this.addSaleRibbon(this.props.item.discount)}
            <div onClick={this.openModal} className="product__wrap-img">
+             {this.AddToFavoriteBanner(this.props.item)}
              <img className="product__img" src={this.props.item.image.sizes.Original.url}/>
            </div>
            <div className="product__caption">
              <p className="product__name">{this.props.item.name}</p>
              {this.checkSale(this.props.item.salePriceLabel)}
              <div className="product__actions">
-               <a className="product__button" target="_blank" href={this.props.item.clickUrl}>Add to list</a>
+               <a className="product__button" target="_blank" onClick={() => {this.props.onSetFavoriteList(this.props.item)}}>Add to list</a>
                <a className="product__button product__button--buy" target="_blank" href={this.props.item.clickUrl}>Buy now</a>
              </div>
            </div>
@@ -100,7 +109,10 @@ import CloseIcon from '../images/close.png';
                <Row>
                  <Col xs="12" sm="12" md="4" lg="4">
                    <div className="flex-center">
-                     <img className="modal__img" src={this.props.item.image.sizes.Original.url}/>
+                     <div className="modal__wrap-img">
+                       <img className="modal__img" src={this.props.item.image.sizes.Original.url}/>
+                       {this.AddToFavoriteBanner(this.props.item)}
+                     </div>
                    </div>
                  </Col>
                  <Col xs="12" sm="12" md="8" lg="8">
@@ -110,7 +122,7 @@ import CloseIcon from '../images/close.png';
                        {this.checkSale(this.props.item.salePriceLabel)}
                        <Row>
                          <Col xs="6" sm="6" md="6" lg="6">
-                           <a className="filter__button" target="_blank" href={this.props.item.clickUrl}>Add to list</a>
+                           <a className="filter__button" target="_blank" onClick={() => {this.props.onSetFavoriteList(this.props.item)}}>Add to list</a>
                          </Col>
                          <Col xs="6" sm="6" md="6" lg="6">
                            <a className="filter__button filter__button--inverse" target="_blank" href={this.props.item.clickUrl}>Buy now</a>
@@ -134,4 +146,10 @@ import CloseIcon from '../images/close.png';
    }
  }
 
-export default ListItem;
+ const mapStateProps = (state) => (
+   {
+   favoriteProducts: state.favoriteProducts,
+   favoriteProductsId: state.favoriteProductsId,
+ })
+
+ export default connect(mapStateProps, null)(ListItem);

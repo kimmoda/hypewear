@@ -17,17 +17,16 @@ export default class Search extends Component {
   render () {
     // console.log("asdasdasd", this.props);
     return (
-      <div className="event">
-        <div className="event__date">
+      <div className="search">
           <Input
             type="text"
             name="email"
             id="exampleEmail"
             ref="search"
-            placeholder="search..."
+            placeholder="type the search and press enter..."
+            className="search__input"
             onKeyUp={this.onInputKeyUp}
           />
-        </div>
       </div>
     )
   }

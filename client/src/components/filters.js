@@ -141,10 +141,10 @@ import { addColors, toggleClassColor, ClearFilterColors, addMaxPrice, addMinPric
                 </Row>
                 <div className="filter__wrap-button">
                   <Row>
-                    <Col xs="12" sm="12" md="12" lg="8">
+                    <Col xs="12" sm="12" md="12" lg="6">
                       <div className="filter__button filter__button--inverse" onClick={()=> {this.props.onSetPrice(this.props.minPrice, this.props.maxPrice)}}>Set</div>
                     </Col>
-                    <Col xs="12" sm="12" sm="12" lg="4">
+                    <Col xs="12" sm="12" sm="12" lg="6">
                     </Col>
                   </Row>
                 </div>

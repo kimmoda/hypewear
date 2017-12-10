@@ -9,7 +9,7 @@ import { connect } from "react-redux"
    getProduct = (products) => {
     return products.map( product => {
        return (
-          <ListItem key={product.id} item={product}/>
+          <ListItem onSetFavoriteList={this.props.onSetFavoriteList} key={product.id} item={product}/>
        )
      });
    }

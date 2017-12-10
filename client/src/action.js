@@ -60,3 +60,10 @@ export const addPricefilter = (min, max) => {
     max: max,
   })
 }
+
+export const addToFavoriteList = (product) => {
+  return ({
+    type: "ADD_TO_FAVOURITE_LIST",
+    product: product
+  })
+}

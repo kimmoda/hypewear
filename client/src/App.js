@@ -7,10 +7,14 @@ import Logo from './images/hypewear-logo.svg';
 
 // components
 import Search from './components/search';
-import Filters from './components/filters';
 import List from './components/list';
-import { addSearch, addProducts, addFilterColor, addPricefilter } from './action.js'
+import ApiProducts from './components/api-products';
+import FavoriteProducts from './components/favorite-products';
+
+import { addSearch, addProducts, addFilterColor, addPricefilter, addToFavoriteList } from './action.js'
 import { connect } from "react-redux"
+
+import { Switch, Route, Link, withRouter } from 'react-router-dom'
 
 class App extends Component {
 
@@ -64,32 +68,48 @@ class App extends Component {
     this.props.addPricefilter(min, max)
   }
 
+  onSetFavoriteList = (product) => {
+    this.props.addToFavoriteList(product)
+  }
+
+  onSetRoute = () => {
+    return (
+      <Switch>
+        <Route exact path='/'
+          render={() =><ApiProducts onSetPrice={this.onSetPrice} getProducts={this.getProducts} onSetFavoriteList={this.onSetFavoriteList}/>}/>
+        <Route path='/favorite-list' component={FavoriteProducts} />
+      </Switch>
+    )
+  }
+
   render() {
     if (this.props.products.length) return (
       <div>
         <header className="header">
           <Container className="header__container">
               <Row>
-                <Col xs="12" sm="12" md="4" lg="4">
-                  <img className="logo__image" src={Logo}></img>
+                <Col xs="8" sm="8" md="3" lg="2">
+                  <div className="flex-center">
+                    <Link to='/'>
+                      <img className="logo__image" src={Logo}></img>
+                    </Link>
+                  </div>
                 </Col>
-                <Col xs="12" sm="12" md="8" lg="8">
+                <Col xs="4" sm="4" md="2" lg="2" className="menu">
+                  <Link className="menu__link" to='/favorite-list'>Favorite List</Link>
+                </Col>
+                <Col xs="12" sm="12" md="7" lg="8">
                   <Search onSearch={this.onSearch} />
                 </Col>
               </Row>
           </Container>
         </header>
-        <div className="bg"></div>
-        <Container fluid={true}>
-            <Row noGutters={true}>
-              <Col className="background__light-grey" xs="12" sm="12" md="4" lg="2">
-                <Filters onSetPrice={this.onSetPrice} getProducts={this.getProducts}/>
-              </Col>
-              <Col className="background__light-grey" xs="12" sm="12" sm="8" lg="10">
-                <List/>
-              </Col>
-            </Row>
-          </Container>
+        <div className="bg">
+          <h2 className="page__title text-center">Hypewear is the best search engine for fashion ;)</h2>
+        </div>
+        <Route exact path='/'
+          render={() =><ApiProducts onSetPrice={this.onSetPrice} getProducts={this.getProducts} onSetFavoriteList={this.onSetFavoriteList}/>}/>
+        <Route path='/favorite-list' component={FavoriteProducts} />
       </div>
     );
     return (
@@ -107,6 +127,7 @@ const mapDispatchToProps = (dispatch) => ({
   addSearch: (inputValue) => dispatch(addSearch(inputValue)),
   addProducts: (products) => dispatch(addProducts(products)),
   addPricefilter: (min, max) => dispatch(addPricefilter(min, max)),
+  addToFavoriteList: (product) => dispatch(addToFavoriteList(product)),
 })
 
 const mapStateProps = (state) => ({
@@ -116,6 +137,7 @@ const mapStateProps = (state) => ({
   filterColor: state.filterColor,
   toggledFilterClass: state.toggledFilterClass,
   filterPrice: state.filterPrice,
+  favoriteProducts: state.favoriteProducts,
 })
 
- export default connect(mapStateProps, mapDispatchToProps)(App);
+ export default withRouter(connect(mapStateProps, mapDispatchToProps)(App));
