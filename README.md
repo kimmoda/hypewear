@@ -5,8 +5,10 @@ Thousand products, of thousand brands from the cheapest one to the most expensiv
 
 ### Homepage
 <img src="screenshots/screen-home.png" width="50%"/>
+
 ### Product detail
 <img src="screenshots/screen-product.png" width="50%"/>
+
 ### Favorite list
 <img src="screenshots/screen-list.png" width="50%"/>
 
