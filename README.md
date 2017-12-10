@@ -1,14 +1,14 @@
 # Hypewear
-YouNoteIt attempts to bring out youtube's full educational potential. 
-It provides a platform for watching tutorials that allows users to take notes while watching the videos, take notes during them and revisit them afterwards.
-
-All you need is a youtube video link and to go to [YouNoteIt](https://notesense.herokuapp.com). Once there, create an account or log in, paste the link on the search bar and start taking notes!
+Hypewear is a search engine for fashion. 
+You can filter and save your favorite products in your list and you can buy the products that you like.
+Thousand products, of thousand brands from the cheapest one to the most expensive comes from the shopcollective API
 
 <img src="images/image1.png" width="70%"/>
 <img src="images/image2.png" width="70%"/>
 
 ## Installation
 * Clone the repo and cd into it.
+* Run `cd hypewear/client`
 * Run `yarn install`.
 * Run `yarn start`
 
